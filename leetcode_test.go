@@ -54,4 +54,16 @@ func BenchmarkLeetCode(b *testing.B) {
             }
         })
     })
+    b.Run("test for valid-parentheses", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            s := "([{}])"
+            if !isValid(s) {
+                b.Error("valid-parentheses test fail")
+            }
+            s2 := "(([{}])"
+            if isValid(s2) {
+                b.Error("valid-parentheses test fail")
+            }
+        })
+    })
 }
