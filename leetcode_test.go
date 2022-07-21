@@ -44,4 +44,14 @@ func BenchmarkLeetCode(b *testing.B) {
             assert(romanToInt("MCMXCIV"), 1994)
         })
     })
+    b.Run("test for longest-common-prefix", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            strs := []string{"flower", "flow", "flight"}
+            got := longestCommonPrefix(strs)
+            want := "fl"
+            if want != got {
+                b.Error("longest-common-prefix test fail")
+            }
+        })
+    })
 }
