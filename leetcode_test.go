@@ -5,7 +5,7 @@ import (
     "testing"
 )
 
-func RunBenchCount(count int, f func()) {
+func RunBenchs(count int, f func()) {
     for n := 0; n < count; n++ {
         f()
     }
@@ -14,7 +14,7 @@ func RunBenchCount(count int, f func()) {
 func BenchmarkLeetCode(b *testing.B) {
     b.Run("test for two-sum", func(b *testing.B) {
         nums := []int{2, 7, 11, 15}
-        RunBenchCount(b.N, func() {
+        RunBenchs(b.N, func() {
             got := twoSum(nums, 9)
             want := []int{0, 1}
             if !reflect.DeepEqual(got, want) {
@@ -23,13 +23,25 @@ func BenchmarkLeetCode(b *testing.B) {
         })
     })
     b.Run("test for palindrome-number", func(b *testing.B) {
-        RunBenchCount(b.N, func() {
+        RunBenchs(b.N, func() {
             gotTrue := isPalindrome(121)
             gotFalse := isPalindrome(10)
             gotMinusFalse := isPalindrome(-121)
             if !gotTrue || gotFalse || gotMinusFalse {
                 b.Error("palindrome-number test fail")
             }
+        })
+    })
+    b.Run("test for roman-to-integer", func(b *testing.B) {
+        assert := func(got, want int) {
+            if got != want {
+                b.Error("roman-to-integer test fail")
+            }
+        }
+        RunBenchs(b.N, func() {
+            assert(romanToInt("III"), 3)
+            assert(romanToInt("LVIII"), 58)
+            assert(romanToInt("MCMXCIV"), 1994)
         })
     })
 }
