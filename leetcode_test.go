@@ -66,4 +66,36 @@ func BenchmarkLeetCode(b *testing.B) {
             }
         })
     })
+    b.Run("test for merge-two-sorted-lists", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            var list1 = &ListNode{
+                Val: 1,
+                Next: &ListNode{
+                    Val: 2,
+                    Next: &ListNode{
+                        Val: 4,
+                    },
+                },
+            }
+            var list2 = &ListNode{
+                Val: 1,
+                Next: &ListNode{
+                    Val: 3,
+                    Next: &ListNode{
+                        Val: 4,
+                    },
+                },
+            }
+            list := mergeTwoLists(list1, list2)
+            checkList := []int{}
+            for list != nil {
+                checkList = append(checkList, list.Val)
+                list = list.Next
+            }
+            want := []int{1, 1, 2, 3, 4, 4}
+            if !reflect.DeepEqual(checkList, want) {
+                b.Error("test merge-two-sorted-lists fail")
+            }
+        })
+    })
 }
