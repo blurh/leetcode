@@ -98,4 +98,23 @@ func BenchmarkLeetCode(b *testing.B) {
             }
         })
     })
+    b.Run("test for remove-duplicates-from-sorted-array", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            assertArray := func(count int, num1, num2 []int) {
+                for i := 0; i <= count-1; i++ {
+                    if num1[i] != num2[i] {
+                        b.Error("test remove-duplicates-from-sorted-array fail")
+                    }
+                }
+            }
+            nums := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+            gotCount := removeDuplicates(nums)
+            wantArray := []int{0, 1, 2, 3, 4}
+            wantCount := len(wantArray)
+            if gotCount != wantCount {
+                b.Error("test remove-duplicates-from-sorted-array fail")
+            }
+            assertArray(gotCount, nums, wantArray)
+        })
+    })
 }
