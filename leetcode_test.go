@@ -117,4 +117,15 @@ func BenchmarkLeetCode(b *testing.B) {
             assertArray(gotCount, nums, wantArray)
         })
     })
+    b.Run("test for remove-element", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            nums := []int{0, 1, 2, 2, 3, 0, 4, 2}
+            gotElement := removeElement(nums, 2)
+            wantElement := 5
+            wantNums := []int{0, 1, 3, 0, 4}
+            if gotElement != wantElement || !reflect.DeepEqual(nums[:gotElement], wantNums) {
+                b.Error("test remove-element fail")
+            }
+        })
+    })
 }
