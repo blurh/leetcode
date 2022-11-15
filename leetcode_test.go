@@ -128,4 +128,16 @@ func BenchmarkLeetCode(b *testing.B) {
             }
         })
     })
+    b.Run("test for search-insert-position", func(b *testing.B) {
+        RunBenchs(b.N, func() {
+            nums := []int{1, 3, 5, 6}
+            target := 2
+            gotPosition := searchInsert(nums, target)
+            wantPosition := 1
+            if gotPosition != wantPosition {
+                b.Error("test search-insert-position fail")
+            }
+        })
+    })
+
 }
